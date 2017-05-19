@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhq.mysql.dao.ScreeningInfoMapper">
+	<!-- 开启缓存 -->
+	<cache />
+	<resultMap id="ScreeningInfoMap" type="com.yhq.mysql.pojo.ScreeningInfo">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="screening_No" jdbcType="VARCHAR" property="screeningNo" />
+		<result column="screening_name" jdbcType="VARCHAR" property="screeningName" />
+		<result column="game_type" jdbcType="VARCHAR" property="gameType" />
+		<result column="eliminate_time" jdbcType="INTEGER" property="eliminateTime" />
+		<result column="wrong_topic_parameter" jdbcType="INTEGER" property="wrongTopicParameter" />
+		<result column="area" jdbcType="VARCHAR" property="area" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, screening_No, screening_name, game_type, eliminate_time, wrong_topic_parameter,
+		area, remark
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ScreeningInfoMap">
+		select
+		<include refid="Base_Column_List" />
+		from screening_info
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from screening_info
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.yhq.mysql.pojo.ScreeningInfo">
+		insert into screening_info (id, screening_No, screening_name,
+		game_type, eliminate_time,
+		wrong_topic_parameter,
+		area, remark)
+		values (#{id,jdbcType=BIGINT}, #{screeningNo,jdbcType=VARCHAR},
+		#{screeningName,jdbcType=VARCHAR},
+		#{gameType,jdbcType=VARCHAR}, #{eliminateTime,jdbcType=INTEGER},
+		#{wrongTopicParameter,jdbcType=INTEGER},
+		#{area,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.yhq.mysql.pojo.ScreeningInfo">
+		insert into screening_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="screeningNo != null">
+				screening_No,
+			</if>
+			<if test="screeningName != null">
+				screening_name,
+			</if>
+			<if test="gameType != null">
+				game_type,
+			</if>
+			<if test="eliminateTime != null">
+				eliminate_time,
+			</if>
+			<if test="wrongTopicParameter != null">
+				wrong_topic_parameter,
+			</if>
+			<if test="area != null">
+				area,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="screeningNo != null">
+				#{screeningNo,jdbcType=VARCHAR},
+			</if>
+			<if test="screeningName != null">
+				#{screeningName,jdbcType=VARCHAR},
+			</if>
+			<if test="gameType != null">
+				#{gameType,jdbcType=VARCHAR},
+			</if>
+			<if test="eliminateTime != null">
+				#{eliminateTime,jdbcType=INTEGER},
+			</if>
+			<if test="wrongTopicParameter != null">
+				#{wrongTopicParameter,jdbcType=INTEGER},
+			</if>
+			<if test="area != null">
+				#{area,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.yhq.mysql.pojo.ScreeningInfo">
+		update screening_info
+		<set>
+			<if test="screeningNo != null">
+				screening_No = #{screeningNo,jdbcType=VARCHAR},
+			</if>
+			<if test="screeningName != null">
+				screening_name = #{screeningName,jdbcType=VARCHAR},
+			</if>
+			<if test="gameType != null">
+				game_type = #{gameType,jdbcType=VARCHAR},
+			</if>
+			<if test="eliminateTime != null">
+				eliminate_time = #{eliminateTime,jdbcType=INTEGER},
+			</if>
+			<if test="wrongTopicParameter != null">
+				wrong_topic_parameter = #{wrongTopicParameter,jdbcType=INTEGER},
+			</if>
+			<if test="area != null">
+				area = #{area,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.yhq.mysql.pojo.ScreeningInfo">
+		update screening_info
+		set screening_No = #{screeningNo,jdbcType=VARCHAR},
+		screening_name = #{screeningName,jdbcType=VARCHAR},
+		game_type = #{gameType,jdbcType=VARCHAR},
+		eliminate_time =
+		#{eliminateTime,jdbcType=INTEGER},
+		wrong_topic_parameter = #{wrongTopicParameter,jdbcType=INTEGER},
+		area =
+		#{area,jdbcType=VARCHAR},
+		remark = #{remark,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+</mapper>

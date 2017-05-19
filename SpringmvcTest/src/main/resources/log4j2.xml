@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug" strict="true" name="XMLConfigTest" packages="org.apache.logging.log4j">
+	<Properties>
+		<Property name="filename">D:\tomcat7.0\webapps\SpringmvcTest\logs\logxml.log</Property>
+	</Properties>
+	<!-- mybatis使用log4j2过滤器调节日志级别为debug -->
+	<Filter type="ThresholdFilter" level="debug" />
+
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="[%date{yyyy-MM-dd HH:mm:ss.SSS}][%thread][%level][%class][%line]:%message%n" />
+		</Console>
+		<Appender type="File" name="File" fileName="${filename}">
+			<Layout type="PatternLayout">
+				<Pattern>%d %p %C{1.} [%t] %m%n</Pattern>
+			</Layout>
+		</Appender>
+		<Appender type="List" name="List">
+		</Appender>
+	</Appenders>
+
+	<Loggers>
+		<!-- mybatis使用log4j2把root调节日志级别为debug -->
+		<Root level="debug">
+			<AppenderRef ref="File" />
+			<AppenderRef ref="Console" />
+		</Root>
+	</Loggers>
+
+</Configuration>

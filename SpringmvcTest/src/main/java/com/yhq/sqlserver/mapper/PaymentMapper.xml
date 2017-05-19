@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhq.sqlserver.dao.PaymentMapper">
+  <resultMap id="BaseResultMap" type="com.yhq.sqlserver.pojo.Payment">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="wdid" jdbcType="INTEGER" property="wdid" />
+    <result column="accountNo" jdbcType="VARCHAR" property="accountno" />
+    <result column="isCredit" jdbcType="BIT" property="iscredit" />
+    <result column="jaccountStatus" jdbcType="INTEGER" property="jaccountstatus" />
+    <result column="paymentLimit" jdbcType="DOUBLE" property="paymentlimit" />
+    <result column="paymentLimitStartDate" jdbcType="TIMESTAMP" property="paymentlimitstartdate" />
+    <result column="paymentLimitEndDate" jdbcType="TIMESTAMP" property="paymentlimitenddate" />
+    <result column="repaymentRound" jdbcType="INTEGER" property="repaymentround" />
+    <result column="outMiniMoney" jdbcType="DOUBLE" property="outminimoney" />
+    <result column="outTranAccountMoney" jdbcType="DOUBLE" property="outtranaccountmoney" />
+    <result column="billRound" jdbcType="CHAR" property="billround" />
+    <result column="billDay" jdbcType="CHAR" property="billday" />
+    <result column="isSpanMonth" jdbcType="BIT" property="isspanmonth" />
+    <result column="miniPaymentCal" jdbcType="NVARCHAR" property="minipaymentcal" />
+    <result column="absolutNum" jdbcType="DOUBLE" property="absolutnum" />
+    <result column="miniAcivity" jdbcType="DOUBLE" property="miniacivity" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, wdid, accountNo, isCredit, jaccountStatus, paymentLimit, paymentLimitStartDate, 
+    paymentLimitEndDate, repaymentRound, outMiniMoney, outTranAccountMoney, billRound, 
+    billDay, isSpanMonth, miniPaymentCal, absolutNum, miniAcivity
+  </sql>
+  <select id="selectByExample" parameterType="com.yhq.sqlserver.pojo.PaymentExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from website_payment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.yhq.sqlserver.pojo.PaymentExample">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    delete from website_payment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.yhq.sqlserver.pojo.PaymentExample" resultType="java.lang.Integer">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    select count(*) from website_payment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    update website_payment
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.wdid != null">
+        wdid = #{record.wdid,jdbcType=INTEGER},
+      </if>
+      <if test="record.accountno != null">
+        accountNo = #{record.accountno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iscredit != null">
+        isCredit = #{record.iscredit,jdbcType=BIT},
+      </if>
+      <if test="record.jaccountstatus != null">
+        jaccountStatus = #{record.jaccountstatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.paymentlimit != null">
+        paymentLimit = #{record.paymentlimit,jdbcType=DOUBLE},
+      </if>
+      <if test="record.paymentlimitstartdate != null">
+        paymentLimitStartDate = #{record.paymentlimitstartdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.paymentlimitenddate != null">
+        paymentLimitEndDate = #{record.paymentlimitenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.repaymentround != null">
+        repaymentRound = #{record.repaymentround,jdbcType=INTEGER},
+      </if>
+      <if test="record.outminimoney != null">
+        outMiniMoney = #{record.outminimoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.outtranaccountmoney != null">
+        outTranAccountMoney = #{record.outtranaccountmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.billround != null">
+        billRound = #{record.billround,jdbcType=CHAR},
+      </if>
+      <if test="record.billday != null">
+        billDay = #{record.billday,jdbcType=CHAR},
+      </if>
+      <if test="record.isspanmonth != null">
+        isSpanMonth = #{record.isspanmonth,jdbcType=BIT},
+      </if>
+      <if test="record.minipaymentcal != null">
+        miniPaymentCal = #{record.minipaymentcal,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.absolutnum != null">
+        absolutNum = #{record.absolutnum,jdbcType=DOUBLE},
+      </if>
+      <if test="record.miniacivity != null">
+        miniAcivity = #{record.miniacivity,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    update website_payment
+    set id = #{record.id,jdbcType=INTEGER},
+      wdid = #{record.wdid,jdbcType=INTEGER},
+      accountNo = #{record.accountno,jdbcType=VARCHAR},
+      isCredit = #{record.iscredit,jdbcType=BIT},
+      jaccountStatus = #{record.jaccountstatus,jdbcType=INTEGER},
+      paymentLimit = #{record.paymentlimit,jdbcType=DOUBLE},
+      paymentLimitStartDate = #{record.paymentlimitstartdate,jdbcType=TIMESTAMP},
+      paymentLimitEndDate = #{record.paymentlimitenddate,jdbcType=TIMESTAMP},
+      repaymentRound = #{record.repaymentround,jdbcType=INTEGER},
+      outMiniMoney = #{record.outminimoney,jdbcType=DOUBLE},
+      outTranAccountMoney = #{record.outtranaccountmoney,jdbcType=DOUBLE},
+      billRound = #{record.billround,jdbcType=CHAR},
+      billDay = #{record.billday,jdbcType=CHAR},
+      isSpanMonth = #{record.isspanmonth,jdbcType=BIT},
+      miniPaymentCal = #{record.minipaymentcal,jdbcType=NVARCHAR},
+      absolutNum = #{record.absolutnum,jdbcType=DOUBLE},
+      miniAcivity = #{record.miniacivity,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

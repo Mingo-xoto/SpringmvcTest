@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<properties>
+		<property name="dialect" value="mysql" />
+	</properties>
+	<!-- 配置mybatis使用log4j2管理日志功能：mybatis需要3.2.7以上，否则启动时会出现类方法找不到错误 -->
+	<settings>
+		<setting name="logImpl" value="LOG4J2" />
+	</settings>
+</configuration>

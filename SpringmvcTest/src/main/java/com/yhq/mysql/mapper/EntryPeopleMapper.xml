@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhq.mysql.dao.EntryPeopleMapper">
+	<!-- 开启缓存 -->
+	<cache />
+	<resultMap id="EntryPeopleMap" type="com.yhq.mysql.pojo.EntryPeople">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="entry_No" jdbcType="VARCHAR" property="entryNo" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="storeCode" jdbcType="VARCHAR" property="storeCode" />
+		<result column="ID_card_No" jdbcType="VARCHAR" property="idCardNo" />
+		<result column="cell_phone" jdbcType="VARCHAR" property="cellPhone" />
+		<result column="area" jdbcType="VARCHAR" property="area" />
+		<result column="valid_flag" jdbcType="BIT" property="validFlag" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, entry_No, name, storeCode, ID_card_No, cell_phone, area, valid_flag
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="EntryPeopleMap">
+		select
+		<include refid="Base_Column_List" />
+		from entry_people
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from entry_people
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.yhq.mysql.pojo.EntryPeople">
+		insert into entry_people (id, entry_No, name,
+		storeCode, ID_card_No, cell_phone,
+		area,
+		valid_flag)
+		values (#{id,jdbcType=BIGINT}, #{entryNo,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+		#{storecode,jdbcType=VARCHAR},
+		#{idCardNo,jdbcType=VARCHAR}, #{cellPhone,jdbcType=VARCHAR},
+		#{area,jdbcType=VARCHAR}, #{validFlag,jdbcType=BIT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.yhq.mysql.pojo.EntryPeople">
+		insert into entry_people
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="entryNo != null">
+				entry_No,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="storecode != null">
+				storeCode,
+			</if>
+			<if test="idCardNo != null">
+				ID_card_No,
+			</if>
+			<if test="cellPhone != null">
+				cell_phone,
+			</if>
+			<if test="area != null">
+				area,
+			</if>
+			<if test="validFlag != null">
+				valid_flag,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="entryNo != null">
+				#{entryNo,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="storecode != null">
+				#{storecode,jdbcType=VARCHAR},
+			</if>
+			<if test="idCardNo != null">
+				#{idCardNo,jdbcType=VARCHAR},
+			</if>
+			<if test="cellPhone != null">
+				#{cellPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="area != null">
+				#{area,jdbcType=VARCHAR},
+			</if>
+			<if test="validFlag != null">
+				#{validFlag,jdbcType=BIT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.yhq.mysql.pojo.EntryPeople">
+		update entry_people
+		<set>
+			<if test="entryNo != null">
+				entry_No = #{entryNo,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="storecode != null">
+				storeCode = #{storecode,jdbcType=VARCHAR},
+			</if>
+			<if test="idCardNo != null">
+				ID_card_No = #{idCardNo,jdbcType=VARCHAR},
+			</if>
+			<if test="cellPhone != null">
+				cell_phone = #{cellPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="area != null">
+				area = #{area,jdbcType=VARCHAR},
+			</if>
+			<if test="validFlag != null">
+				valid_flag = #{validFlag,jdbcType=BIT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.yhq.mysql.pojo.EntryPeople">
+		update entry_people
+		set entry_No = #{entryNo,jdbcType=VARCHAR},
+		name =
+		#{name,jdbcType=VARCHAR},
+		storeCode = #{storecode,jdbcType=VARCHAR},
+		ID_card_No = #{idCardNo,jdbcType=VARCHAR},
+		cell_phone =
+		#{cellPhone,jdbcType=VARCHAR},
+		area = #{area,jdbcType=VARCHAR},
+		valid_flag = #{validFlag,jdbcType=BIT}
+		where id =
+		#{id,jdbcType=BIGINT}
+	</update>
+</mapper>

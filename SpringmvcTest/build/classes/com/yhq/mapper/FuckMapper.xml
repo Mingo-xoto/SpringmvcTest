@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhq.dao.FuckDao">
+	<resultMap type="Fuck" id="FuckMap">
+		<result column="id" property="id" jdbcType="INTEGER" />
+		<result column="user_name" property="name" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="age" property="age" jdbcType="VARCHAR" />
+		<result column="countName" property="countName" jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="TABLE_NAME">user_t</sql>
+	<insert id="insert" parameterType="Fuck">
+		insert into user_t
+		(id,user_name,password,age)
+		values(#{id,jdbcType=INTEGER},#{name,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{age,jdbcType=VARCHAR});
+	</insert>
+	
+	<insert id="insertAsKeyIncrement" useGeneratedKeys="true"
+		keyProperty="id" parameterType="Fuck">
+		insert into user_t
+		(user_name,password,age)
+		values(#{name,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{age,jdbcType=VARCHAR});
+	</insert>
+	
+	<select id="select" resultMap="FuckMap" parameterType="java.lang.Integer">
+		select *
+		from user_t where id=#{id};
+	</select>
+
+	<!-- 查询时使用resultType，表字段不会跟pojo的各自属性自动匹配关联 -->
+	<select id="selectAll" resultType="Fuck">
+		select id,user_name as
+		name,password,age from user_t;
+	</select>
+	
+	<!-- 查询时使用resultMap时会使得表字段跟pojo的属性自动匹配 -->
+	<select id="selectAll2" resultMap="FuckMap">
+		select * from user_t;
+	</select>
+	
+	<!-- 按照某个字段分组取数量，配置数量别名与pojo实体类的属性映射 -->
+	<select id="selectNumCountByName" resultMap="FuckMap">
+		select
+		user_name,count(user_name) as countName from user_t where
+		user_name=#{name} group by user_name;
+	</select>
+
+	<update id="updateNameById" parameterType="Fuck">
+		update user_t set
+		user_name=#{name} where id=#{id};
+	</update>
+</mapper>

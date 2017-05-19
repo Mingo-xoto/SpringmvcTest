@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhq.mysql.dao.EntryGradeMapper">
+	<!-- 开启缓存 -->
+	<cache />
+	<resultMap id="EntryGradeMap" type="com.yhq.mysql.pojo.EntryGrade">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="entry_people_id" jdbcType="BIGINT" property="entryPeopleId" />
+		<result column="screening_No" jdbcType="VARCHAR" property="screeningNo" />
+		<result column="status" jdbcType="VARCHAR" property="status" />
+		<result column="elapsed_time" jdbcType="INTEGER" property="elapsedTime" />
+		<result column="wrong_topic_count" jdbcType="INTEGER" property="wrongTopicCount" />
+		<result column="total_time" jdbcType="INTEGER" property="totalTime" />
+		<result column="done_time" jdbcType="TIMESTAMP" property="doneTime" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, entry_people_id, screening_No, status, elapsed_time, wrong_topic_count, total_time,
+		done_time
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="EntryGradeMap">
+		select
+		<include refid="Base_Column_List" />
+		from entry_grade
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from entry_grade
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.yhq.mysql.pojo.EntryGrade">
+		insert into entry_grade (id, entry_people_id, screening_No,
+		status, elapsed_time,
+		wrong_topic_count,
+		total_time, done_time)
+		values (#{id,jdbcType=BIGINT}, #{entryPeopleId,jdbcType=BIGINT},
+		#{screeningNo,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR}, #{elapsedTime,jdbcType=INTEGER},
+		#{wrongTopicCount,jdbcType=INTEGER},
+		#{totalTime,jdbcType=INTEGER}, #{doneTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.yhq.mysql.pojo.EntryGrade">
+		insert into entry_grade
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="entryPeopleId != null">
+				entry_people_id,
+			</if>
+			<if test="screeningNo != null">
+				screening_No,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="elapsedTime != null">
+				elapsed_time,
+			</if>
+			<if test="wrongTopicCount != null">
+				wrong_topic_count,
+			</if>
+			<if test="totalTime != null">
+				total_time,
+			</if>
+			<if test="doneTime != null">
+				done_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="entryPeopleId != null">
+				#{entryPeopleId,jdbcType=BIGINT},
+			</if>
+			<if test="screeningNo != null">
+				#{screeningNo,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=VARCHAR},
+			</if>
+			<if test="elapsedTime != null">
+				#{elapsedTime,jdbcType=INTEGER},
+			</if>
+			<if test="wrongTopicCount != null">
+				#{wrongTopicCount,jdbcType=INTEGER},
+			</if>
+			<if test="totalTime != null">
+				#{totalTime,jdbcType=INTEGER},
+			</if>
+			<if test="doneTime != null">
+				#{doneTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.yhq.mysql.pojo.EntryGrade">
+		update entry_grade
+		<set>
+			<if test="entryPeopleId != null">
+				entry_people_id = #{entryPeopleId,jdbcType=BIGINT},
+			</if>
+			<if test="screeningNo != null">
+				screening_No = #{screeningNo,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="elapsedTime != null">
+				elapsed_time = #{elapsedTime,jdbcType=INTEGER},
+			</if>
+			<if test="wrongTopicCount != null">
+				wrong_topic_count = #{wrongTopicCount,jdbcType=INTEGER},
+			</if>
+			<if test="totalTime != null">
+				total_time = #{totalTime,jdbcType=INTEGER},
+			</if>
+			<if test="doneTime != null">
+				done_time = #{doneTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.yhq.mysql.pojo.EntryGrade">
+		update entry_grade
+		set entry_people_id = #{entryPeopleId,jdbcType=BIGINT},
+		screening_No = #{screeningNo,jdbcType=VARCHAR},
+		status = #{status,jdbcType=VARCHAR},
+		elapsed_time =
+		#{elapsedTime,jdbcType=INTEGER},
+		wrong_topic_count = #{wrongTopicCount,jdbcType=INTEGER},
+		total_time =
+		#{totalTime,jdbcType=INTEGER},
+		done_time = #{doneTime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+</mapper>
